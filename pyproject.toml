@@ -1,0 +1,17 @@
+[project]
+name = "ai-coscientist"
+version = "0.2.0"
+description = "LangGraph reference implementation of an AI co-scientist with tournament evolution"
+requires-python = ">=3.10"
+dependencies = [
+  "langgraph>=0.2.30",
+  "langchain>=0.2.14",
+  "langchain-openai>=0.2.3",
+  "langchain-community>=0.2.11",
+  "openai>=1.40.0",
+  "pydantic>=2.6",
+  "python-dotenv>=1.0.1",
+]
+
+[tool.setuptools]
+py-modules = []
