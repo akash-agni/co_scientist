@@ -5,6 +5,8 @@ import logging
 
 from coscientist.graph_app import build_app
 from coscientist.state import CoScientistState, ResearchGoal
+import uuid
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(
@@ -56,6 +58,36 @@ try:
 
     logger.info("Application completed successfully")
 
+    # Sort population once
+    sorted_population = sorted(final["population"], key=lambda x: x.score, reverse=True)
+
+    # Generate unique filename with UUID and datetime
+    now = datetime.now()
+    date_time_str = now.strftime("%Y%m%d_%H%M%S")
+    unique_id = str(uuid.uuid4())
+    filename = f"research_output_{date_time_str}_{unique_id}.md"
+    
+    # Prepare output content
+    output_content = []
+    output_content.append(f"# Research Results - {now.strftime('%Y-%m-%d %H:%M:%S')}\n")
+    output_content.append(f"**Research Goal:** {args.goal}\n")
+    
+    output_content.append("## Research Overview\n")
+    output_content.append(final["overview"])
+    
+    output_content.append("\n## Shortlisted Hypotheses\n")
+    for h in sorted_population[: args.shortlist]:
+        output_content.append(f"- **{h.text}** (score={h.score:.1f}, gen={h.generation}, id={h.id[:8]})")
+    
+    # Write to markdown file
+    try:
+        with open(filename, 'w') as f:
+            f.write('\n'.join(output_content))
+        logger.info(f"Research output saved to {filename}")
+    except Exception as e:
+        logger.error(f"Failed to save research output to file: {str(e)}")
+
+    # Print to console as before
     print("\n=== RESEARCH OVERVIEW ===\n")
     print(final["overview"])
     logger.info("Research overview generated")
@@ -63,7 +95,6 @@ try:
     print("\n=== SHORTLIST ===\n")
     logger.info(f"Generating shortlist of top {args.shortlist} hypotheses")
 
-    sorted_population = sorted(final["population"], key=lambda x: x.score, reverse=True)
     for h in sorted_population[: args.shortlist]:
         print(f"- {h.text} (score={h.score:.1f}, gen={h.generation}, id={h.id[:8]})")
         logger.debug(

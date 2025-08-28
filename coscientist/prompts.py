@@ -39,4 +39,8 @@ Summarize the top hypotheses as a **research overview**:
 - Materials & methods sketch
 - Ethical / safety checks (if relevant)
 - Decision next steps for a scientist in the loop
+
+Formatting guidelines:
+- Generate a valid Markdown response.
+- Use proper formatting and syntax highlighting.
 """

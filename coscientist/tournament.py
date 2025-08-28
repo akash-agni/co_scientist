@@ -14,7 +14,7 @@ class EloRanker:
     ratings: dict = field(default_factory=dict)
 
     def rating(self, hyp_id: str) -> float:
-        return self.ratings.get(hyp_id, 1500.0)
+        return self.ratings.get(hyp_id, 1200.0)
 
     def update(self, winner: str, loser: str):
         import math
