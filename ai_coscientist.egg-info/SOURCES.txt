@@ -1,7 +1,0 @@
-README.md
-pyproject.toml
-ai_coscientist.egg-info/PKG-INFO
-ai_coscientist.egg-info/SOURCES.txt
-ai_coscientist.egg-info/dependency_links.txt
-ai_coscientist.egg-info/requires.txt
-ai_coscientist.egg-info/top_level.txt
